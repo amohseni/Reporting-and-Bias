@@ -97,6 +97,18 @@ shinyUI(fluidPage(
       
     ),
     
+    # Number of reports
+    sliderInput(
+      "numberOfReports",
+      "Number of reports \\(n\\):",
+      min = 1,
+      max = 100,
+      value = 10,
+      step = 1
+    )
+    
+  ),
+    
     # Main Panel with Stationary Distribution + Simulation & Stats Panels
     mainPanel(
       fluidRow(
