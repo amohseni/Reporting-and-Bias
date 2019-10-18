@@ -1,4 +1,4 @@
-# REPORTING, CONFIRMATION BIAS, AND BELIEF DISTORTION
+# NEWS, CONFIRMATION BIAS, AND BELIEF POLZRIZATION
 # << UI >>
 # by Aydin Mohseni
 
@@ -46,7 +46,7 @@ shinyUI(fluidPage(
         "True mean \\(\\mu\\):",
         min = -5,
         max = 5,
-        value = 0,
+        value = 1,
         step = 0.5
       ),
       sliderInput(
@@ -75,8 +75,8 @@ shinyUI(fluidPage(
         "Cherry-picking of extreme events by the news \\(p\\):",
         min = 0,
         max = 5,
-        value = 0,
-        step = 0.5
+        value = 1,
+        step = 0.25
       ),
       
       # "Fair-and-balanced" reporting of events by the news
@@ -91,23 +91,21 @@ shinyUI(fluidPage(
         "Individual confirmation bias \\(\\beta\\):",
         min = -5,
         max = 5,
-        value = 0,
+        value = -1,
         step = 0.5
+      ),
+      
+      # Weight of reports vs. individual bias
+      sliderInput(
+        "weightOfEvidence",
+        "Weight of evidence vs. individual bias \\(w\\):",
+        min = 0,
+        max = 1,
+        value = 0.5,
+        step = 0.05
       )
       
     ),
-    
-    # Number of reports
-    sliderInput(
-      "numberOfReports",
-      "Number of reports \\(n\\):",
-      min = 1,
-      max = 100,
-      value = 10,
-      step = 1
-    )
-    
-  ),
     
     # Main Panel with Stationary Distribution + Simulation & Stats Panels
     mainPanel(

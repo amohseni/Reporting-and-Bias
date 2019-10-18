@@ -49,16 +49,17 @@ shinyServer(function(input, output, session) {
     meanNews <- mean(data)
     sdNews <- sd(data)
     
-    # Create the pior & posterior distributions of beliefs of an individual
+    # Create the prior & posterior distributions of beliefs of an individual
     Bias <- as.numeric(input$individualBias)
     IndividualBias <- sapply(x, dnorm, mean = Bias, sd = TrueStateSD)
     # Update the number of reports observed by individuals
-    n <- as.numeric(input$numberOfReports)
-    meanPerception <- ((n * meanNews / sdNews) + (Bias / TrueStateSD)) / ((n / sdNews) + (1 / TrueStateSD))
-    sdPerception <- ((n / sdNews) + (1 / TrueStateSD)) ^ (-1)
+    weightOfEvidence <- as.numeric(input$weightOfEvidence)
+    meanPerception <- (weightOfEvidence * meanNews) + ((1 - weightOfEvidence) * Bias)
+    # sdPerception <- ((n / sdNews) + (1 / TrueStateSD)) ^ (-1)
+    sdPerception <- (weightOfEvidence * sdNews) + ((1 - weightOfEvidence) * TrueStateSD)
     IndividualPerception <- sapply(x, dnorm, mean = meanPerception, sd = sdPerception)
     IndividualPerceptionParam <- IndividualPerception
-
+    
     # OUTPUT the data for the plots
     h <-
       list(
